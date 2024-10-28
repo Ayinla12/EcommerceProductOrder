@@ -139,6 +139,9 @@ public class registration {
         // Section: deletes user account
         driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div/div/a")).click();
         driver.findElement(By.xpath("//*[@id=\"header\"]/div/div/div/div[2]/div/ul/li[5]/a")).click();
+        // verifies account deletion message
+        String deletionMessage = driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div/p[1]")).getText();
+        Assert.assertEquals(deletionMessage, "Your account has been permanently deleted!");
         driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div/div/a")).click();
     }
 
