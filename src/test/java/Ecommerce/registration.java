@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -34,12 +35,12 @@ public class registration {
     public void launchHomepage() {
         //Section: opens homepage & verify it loaded correctly
         driver.get("https://automationexercise.com/");
-       try {
-           WebElement consentButton = driver.findElement(By.xpath("//button[@aria-label='Consent']"));
-           consentButton.click();
-       }catch (Exception e){
-           System.out.println("consent button not displayed");
-       }
+        try {
+            WebElement consentButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[@aria-label='Consent']")));
+            consentButton.click();
+        } catch (Exception e) {
+            System.out.println("consent button not displayed");
+        }
 
         String title = driver.getTitle();
         Assert.assertEquals(title, "Automation Exercise");
@@ -116,6 +117,7 @@ public class registration {
         String confirmationMessage = driver.findElement(By.xpath("//*[@id=\"form\"]/div/div/div/p[1]")).getText();
         Assert.assertEquals(confirmationMessage, "Congratulations! Your new account has been successfully created!");
     }
+
 
     @Test(priority = 5)
     public void completeOrder() {
